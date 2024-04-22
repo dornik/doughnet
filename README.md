@@ -1,6 +1,6 @@
 ## DoughNet :doughnut: A Visual Predictive Model for Topological Manipulation of Deformable Objects
 
-[[Website]](https://dough-net.github.io/)
+[[Website]](https://dough-net.github.io/) &nbsp;&nbsp;&bull;&nbsp;&nbsp; [[arXiv]](http://arxiv.org/abs/2404.12524)
 
 ---
 

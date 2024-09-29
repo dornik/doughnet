@@ -1,0 +1,14 @@
+defaults:
+- common@_here_
+- self_attn@sa
+- cross_attn@ca
+
+type: saca_attn
+depth: 4  # number of attention blocks, must be multiple of two (self + cross)
+sa:
+  dim: ${..dim}
+  head_dim: ${..head_dim}
+ca:
+  dim: ${..dim}
+  head_dim: ${..head_dim}
+  num_heads: 4

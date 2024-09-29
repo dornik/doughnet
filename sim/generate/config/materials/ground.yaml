@@ -1,0 +1,6 @@
+name: ground
+type: tool
+
+friction: 8.0
+contact_softness: 100.0
+collision_type: particle

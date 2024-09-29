@@ -1,0 +1,18 @@
+defaults:
+- common
+- ../materials/dough@material
+
+geom:
+  type: cube
+
+  x: 0.0
+  y: 0.0
+
+  side: ${eval:'${..half_size}*2'}
+  # size: (0.1, 0.1, 0.1)  # either this or lower & upper
+  lower: (${eval:'-${..half_size} + ${..geom.x}'}, ${eval:'${..length}*-0.5 + ${..geom.y}'}, 0.001)
+  upper: (${eval:'${..half_size} + ${..geom.x}'}, ${eval:'${..length}*0.5 + ${..geom.y}'}, ${eval:'${..geom.side}+0.001'})
+  euler: (0.0, 0.0, 0.0)
+
+surface:
+  color: (0.1, 0.8, 0.8, 1.0)

@@ -1,0 +1,10 @@
+name: dough
+type: elastoplastic
+
+# E: 1e3  # Young's modulus; default: 1e3 -- lower ~ softer (but also depends on rho/density)
+# v: 0.4  # Poisson's ratio; default: 0.4
+lame_mu: 357.14  # equivalent Lamé parameter; mu = E / (2 * (1 + v)) -- same as shear modulus G
+lame_lambda: 1428.57  # equivalent Lamé parameter; lambda = E * v / ((1 + v) * (1 - 2 * v))
+rho: 1.0  # density
+yield_low_high: [0.0005, 0.001]  # lower ~ softer, below 1e-3: numerical instabilities, lower>>higher: rips apart, 1.0: bouncy
+filling: jittered

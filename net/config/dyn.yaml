@@ -1,0 +1,64 @@
+defaults:
+- common
+- _self_
+
+cuda_id: 0
+log_wandb: True
+logging:
+  name: dyn
+  
+settings:
+  ddp: False
+  # --
+  resume: True
+  resume_path: weights/ae.pth
+  resume_freeze: True
+  # --
+  val_single: True
+  val_multi: True  # requires bs=1
+  val_every: 3
+  # --
+  test_single: True
+  test_multi: True  # requires bs=1
+  # --
+  test_only: False  # eval mode
+  test_path: weights/dyn.pth
+
+dataset:
+  next_frames: 2  # 0: cur, 1: cur -> nxt, 2: cur -> nxt -> nxtnxt
+
+model:
+  condition:
+    depth: 6  # this is saca-saca-saca (depth//2 stacks)
+    # sa: uses its defaults, hence depth=2, num_heads=4
+    ca:
+      # depth is always 1 here
+      num_heads: 8
+      
+loss:
+  # -- geometry reconstruction
+  # mask occupancy (and part) loss
+  w_focal: 1.0
+  focal_alpha: 0.25  # default: 0.25
+  focal_gamma: 2.0  # default: 2.0
+  # latent space regularization
+  z_noise: 0.0
+  w_l2_cur: 0.0
+  w_l2_nxt: 0.0
+  w_cos_cur: 0.0
+  w_cos_nxt: 0.0
+  # balance of tasks (reconstruction, prediction) and time steps (cur, nxt, nxtnxt)
+  w_rec_cur: 0.0
+  w_rec_nxt: 0.0
+  w_rec_nxtnxt: 0.0
+  w_pre_nxt: 0.0  # predict nxt (from rec cur)
+  w_pre_nxtnxt: 0.0  # predict nxtnxt (from pre nxt)
+  # -- topology prediction
+  w_top: 0.001  # default: 1e-3 = 0.001
+  # -- latent space supervision for prediction
+  lat_metric: 'smooth'  # 'l1', 'l2', 'smooth', 'cos'
+  # cosine loss
+  w_lat_nxt: 0.5
+  w_lat_nxtnxt: 0.5
+  # - acc
+  acc_keys: ['pre_ciou_nxt']

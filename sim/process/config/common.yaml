@@ -1,0 +1,39 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled
+
+hydra:  # deactivate output
+  output_subdir: null
+  run:  
+    dir: .
+
+base_dir: /SET/THE/PATH/TO/THE/DATASET  # TODO set the path to the dataset; i.e., the same as in sim/generate/config/template.yaml
+
+num_processes: 32  # number of processes to use for parallel processing; 1 = no parallelization
+num_frames: 75  # uniform number of frames per processed scene = last N frames per scene (if total >= N; else all frames, padded with the last frame)
+
+ee:
+  num_simplified_faces: 64  #${cleanup.simplify}  # simplification of ee mesh
+
+sdf:
+  dist_offset: 0.01  # shifts NN distances by this value to get the 0-isosurface
+  bound_padding: 0.01  # padding around object bounding box
+  bound_step: 0.004  # one grid cell per step - controls quality of sdf approximation and thus the mesh
+  in_ee_value: 0.00001  # value of sdf wrt object assigned for particles inside the ee (positive to assign them "outside" of object)
+
+meshing:
+  vert_strategy: dual  # naive, midpoint or dual
+  vert_relaxation_percentage: 0.1  # default = 0.1
+  edge_strategy: bisection  # linear, newton or bisection
+
+cleanup:
+  before:
+    type: laplacian  # none, taubin, laplacian
+    num_iterations: 100  # number of iterations
+    lambda_filter: 0.1  # lambda parameter
+  shrink: 0.0  # shifts reconstructed vertices by this factor in normal direction to get a tighter fit
+  simplify: 3072  # num faces (at most) after quadric decimation on reconstructed mesh -- ideally divisible by 12 st we can have {1,2,3,4} components without remainder
+  after:
+    type: laplacian  # none, taubin, laplacian
+    num_iterations: 10  # number of iterations
+    lambda_filter: 0.1  # lambda parameter

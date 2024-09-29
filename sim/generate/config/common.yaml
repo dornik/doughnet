@@ -1,0 +1,62 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled
+
+hydra:  # deactivate output
+  output_subdir: null
+  run:  
+    dir: .
+
+cuda_id: 0
+render: False
+
+scene_id: '0000'
+max_horizon: ${eval:'${log.n_iter} * 200'}  # max duration of simulation in steps
+warmup_horizon: ${eval:'${log.n_iter} * 5'}  # warmup (i.e., letting soft body settle) duration in steps
+
+sim:
+  seed: 0
+  allocate_gpu_memory: 4.0  # in GB
+  precision: 32
+  logging_level: info
+
+  step_dt: 2e-3
+  substep_dt: 2e-4
+  max_substeps_local: 50
+  gravity: [0.0, 0.0, -9.81]
+
+  tool:
+    floor_height: ${entities.ground.geom.floor_bottom}  # allow the ground mesh above the solver's boundary (else there is no contact and hence no friction)
+  mpm:
+    grid_density: 64  # 1dm bound side length / 64 = 1.5625mm voxel side length
+    particle_diameter: 0.01  # ~1mm at our unit scale of 1dm
+    # note: boundary is padded by 3*dx = 3/grid_density = 3/64 = 0.046875 by default
+    padding: ${eval:'3.0/${sim.mpm.grid_density}'}
+    lower_bound: (${eval:'-0.5 - ${sim.mpm.padding}'}, ${eval:'-0.5 - ${sim.mpm.padding}'}, ${eval:'-${sim.mpm.padding}'})
+    upper_bound: (${eval:'0.5 + ${sim.mpm.padding}'}, ${eval:'0.5 + ${sim.mpm.padding}'}, ${eval:'1.0 + ${sim.mpm.padding}'})
+
+check:
+  horizon: ${eval:'${log.n_iter} * 10'}  # -1 to disable
+  entities: ['left', 'right', 'donut', 'roll']  # only uses those that are present in the scene
+  vel: [0.1, 0.0, 0.0]  # note: is rotated by ee quat
+  min_dist: ${eval:'2/${sim.mpm.grid_density}'}  # 2*dx
+
+log:
+  base_dir: null
+  dt: ${eval:'1/30'}
+  n_iter: ${eval:'int(${log.dt} / ${sim.step_dt})'}
+  wait_after_done: ${eval:'${.n_iter} * 10'}  # simulate this many steps after planner is done with goals
+
+cam:
+  width: 480
+  height: 480
+  fov: 60.0
+  pos: [0.0, 0.0, 1.0]
+  lookat: [0.0, 0.0, 0.0]
+  up: [0.0, 1.0, 0.0]
+
+ee:
+  state:  # out of the way and wide open at creation -- the actual initial state is then set by planner
+    pos: (1.0, 1.0, 1.0)
+    quat: (1.0, 0.0, 0.0, 0.0)
+    open: 1.0

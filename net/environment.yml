@@ -1,0 +1,18 @@
+name: doughnet
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+  - conda-forge
+dependencies:
+  - einops==0.8.0
+  - timm==1.0.7
+  - kornia==0.7.1
+  - wandb==0.16.6
+  - imageio==2.34.2
+  - imageio-ffmpeg==0.5.1
+  - k3d==2.16.1
+  - pip:
+    - ninja==1.11.1.1
+    - --extra-index-url https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.0.0_cu118.html
+    - kaolin==0.15.0

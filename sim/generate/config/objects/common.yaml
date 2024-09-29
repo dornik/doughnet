@@ -1,0 +1,5 @@
+half_size: 0.05  # xz scale, default: 0.05 -> 0.1 side length
+length: 0.3  # y scale, default: 0.5
+
+surface:
+  color: (0.9, 0.9, 0.9, 1.0)

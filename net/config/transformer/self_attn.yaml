@@ -1,0 +1,7 @@
+defaults:
+- common@_here_
+
+type: self_attn
+drop_path_rate: 0.0
+depth: 2  # number of blocks
+num_heads: 4

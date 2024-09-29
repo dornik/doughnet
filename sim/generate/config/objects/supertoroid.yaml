@@ -1,0 +1,26 @@
+defaults:
+- common
+- ../materials/dough@material
+
+geom:
+  type: supertoroid
+
+  x: 0.0
+  y: 0.0
+  ratio: 1.0  # elongation ratio applied to y
+  xscale: ${..length}
+  yscale: ${eval:'${..length} * ${..geom.ratio}'}
+  height: ${eval:'${..half_size} * 2.0'}
+
+  center: (${..geom.x}, ${..geom.y}, ${..half_size})
+  size: (${..geom.xscale}, ${..geom.yscale}, ${..geom.height})
+  hole: 3.0  # 1.0 is a sphere, >1.0 is a torus -- [1.5, 5.0] is a reasonable range, 3.0 a good default
+  e_lat: 1.0  # 1.0 is round, 0.0 is square
+  e_lon: 1.0  # 1.0 is round, 0.0 is square
+  euler: (0.0, 0.0, 0.0)
+
+material:
+  filling: jittered
+
+surface:
+  color: (0.1, 0.8, 0.8, 1.0)

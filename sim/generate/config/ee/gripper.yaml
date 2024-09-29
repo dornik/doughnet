@@ -1,0 +1,22 @@
+defaults:
+- common
+- finger@entities.finger_left
+- finger@entities.finger_right
+
+type: gripper
+
+# create in fully closed position
+entities:
+  finger_left:  # note: original mesh scale is (1.0,1.0,0.125)
+    geom:
+      scale: (0.05, 0.05, 1.0)
+      offset_pos: (-0.025, 0.0, 0.125)  # bottom right of finger is at (0,0,0)
+      pos: (0.0, 0.0, 0.0)
+  finger_right:
+    geom:
+      scale: (0.05, 0.05, 1.0)
+      offset_pos: (0.025, 0.0, 0.125)  # bottom left of finger is at (0,0,0)
+      pos: (0.0, 0.0, 0.0)
+
+state:
+  open: 0.0  # instantiate fully closed

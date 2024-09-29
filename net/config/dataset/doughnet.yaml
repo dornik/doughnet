@@ -1,0 +1,6 @@
+name: doughnet
+
+path: data
+n_points: ${..n_points}
+next_frames: ${..next_frames}  # 1: cur -> nxt, 2: cur -> nxt -> nxtnxt
+next_frame_offset: ${..next_frame_offset}  # between cur and nxt

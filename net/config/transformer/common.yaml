@@ -1,0 +1,2 @@
+dim: ${dimensions.latent_dim}
+head_dim: ${dimensions.latent_dim}

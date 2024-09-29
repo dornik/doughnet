@@ -1,0 +1,18 @@
+defaults:
+- ../materials/ee@material
+
+geom:
+  type: mesh
+  name: finger_cuboid
+  file: board.obj  # note: initial scale is (1.0,1.0,0.125), centered at (0,0,0) and thus in the xy plane
+  # preprocessing -- note: applied in order of scale > euler > pos
+  offset_pos: (0.0, 0.0, 0.0)
+  offset_euler: (0.0, 0.0, 0.0)
+  scale: (1.0, 1.0, 1.0)
+  # placement
+  pos: (0.0, 0.0, 0.0)
+  euler: (0.0, 0.0, 0.0)
+  geom:
+
+surface:
+  color: (0.7, 0.7, 0.7, 1.0)

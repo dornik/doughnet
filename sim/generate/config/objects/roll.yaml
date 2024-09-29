@@ -1,0 +1,17 @@
+defaults:
+- common
+- ../materials/dough@material
+
+geom:
+  type: cylinder
+
+  x: 0.0
+  y: 0.0
+
+  height: ${..length}
+  radius: ${..half_size}
+  center: (${..geom.x}, ${..geom.y}, ${..geom.radius})
+  euler: (0.0, 0.0, 0.0)
+
+surface:
+  color: (0.1, 0.8, 0.8, 1.0)

@@ -1,0 +1,10 @@
+# default: push towards (0,0,0) in x direction
+
+defaults:
+- common
+
+type: push
+
+from_offset: (-0.1, 0.0, 0.0)
+to_pos: (0.0, 0.0, 0.0)
+to_quat: (1.0, 0.0, 0.0, 0.0)

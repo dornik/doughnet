@@ -1,0 +1,11 @@
+# set pre-grasp pose and opening, move to grasp pose, close gripper
+
+defaults:
+- common
+- push
+
+type: grasp
+
+from_offset: (0.0, 0.0, 0.0)  # override: no offset
+init_d: 0.5  # opening of gripper pre-grasp
+close_d: 0.0  # opening of gripper at grasp

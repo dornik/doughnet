@@ -1,0 +1,6 @@
+defaults:
+- common@_here_
+
+type: cross_attn
+drop_path_rate: 0.0
+num_heads: 1

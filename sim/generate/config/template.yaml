@@ -1,0 +1,65 @@
+defaults:
+- common
+- objects/ground@entities.ground
+- objects/supertoroid@entities.donut
+# - objects/cube@entities.left
+# - objects/roll@entities.right
+- ee/gripper@ee
+- actions/grasp@actions.grasp
+- _self_
+
+scene_id: null  # TODO give each scene a unique id (string); will be the name of the folder in the dataset
+
+render: true
+log:
+  base_dir:  /SET/THE/PATH/TO/THE/DATASET  # TODO set the path to the dataset
+check:
+  horizon: ${eval:'${log.n_iter} * 10'}  # -1 deactivates topology check
+
+actions:
+  grasp:
+    wait: 0
+    type: grasp
+    from_offset:
+    - 0.0
+    - 0.0
+    - 0.0
+    to_pos:
+    - 0.0
+    - 0.0
+    - 0.0
+    to_quat:
+    - 0.96592583
+    - 0.0
+    - 0.0
+    - 0.25881905
+    init_d: 0.5
+    close_d: 0.005
+
+# entities:  # ex1: rolls instead of a donut (change defaults to left/right instead of donut)
+#   left:
+#     geom:
+#       x: -0.1
+#   right:
+#     geom:
+#       x: 0.1
+# ee:  # ex2: wide fingers
+#   entities:
+#     finger_left:
+#       geom:
+#         scale: (0.015, 0.5, 1.0)
+#         offset_pos: (-0.0075, 0.0, 0.125)  # bottom right of finger is at (0,0,0)
+#     finger_right:
+#       geom:
+#         scale: (0.015, 0.5, 1.0)
+#         offset_pos: (0.0075, 0.0, 0.125)  # bottom left of finger is at (0,0,0)
+# ee:  # ex3: narrow fingers
+#   entities:
+#     finger_left:
+#       geom:
+#         scale: (0.1, 0.015, 1.0)
+#         offset_pos: (-0.05, 0.0, 0.125)  # bottom right of finger is at (0,0,0)
+#     finger_right:
+#       geom:
+#         scale: (0.1, 0.015, 1.0)
+#         offset_pos: (0.05, 0.0, 0.125)  # bottom left of finger is at (0,0,0)

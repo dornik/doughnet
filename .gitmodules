@@ -1,0 +1,7 @@
+[submodule "sim/sdftoolbox"]
+	path = sim/sdftoolbox
+	url = https://github.com/cheind/sdftoolbox.git
+
+[submodule "net/nvdiffrast"]
+	path = net/nvdiffrast
+	url = https://github.com/NVlabs/nvdiffrast.git

@@ -1,0 +1,23 @@
+controller:
+  lin:
+    p: 40.0  # gain
+    i: 0.0  # reset
+    d: 0.0  # derivative
+    vmax: 0.25
+  ang:
+    p: 40.0  # gain
+    i: 0.0  # reset
+    d: 0.0  # derivative
+    vmax: 0.785  # 45 degrees/s = 1/8 rotation/s
+  grip:
+    p: 40.0  # gain
+    i: 0.0  # reset
+    d: 0.0  # derivative
+    vmax: ${eval:'${..lin.vmax}/2'}  # note: applied per finger, maximal relative velocity is thus 2*vmax_grip
+
+  dt: ${sim.step_dt}
+  tol: 1e-2  # if controller outputs velocities lower than this, we assume it is done -- choose smaller than any vmax
+
+state:
+  pos: (1.0, 1.0, 1.0)  # instantiate out-of-bounds
+  quat: (1.0, 0.0, 0.0, 0.0)

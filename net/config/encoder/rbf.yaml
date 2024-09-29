@@ -1,0 +1,5 @@
+type: rbf
+input_dim: ${dimensions.input_dim}
+feature_dim: ${eval:'${dimensions.num_parts} if ${dimensions.input_dim} > 3 else 0'}  # we add a one-hot encoding if a label is present in the input
+embedding_dim: 60  # needs to be divisible by 6 (by 2 for sin/cos and by 3 for xyz)
+output_dim: ${dimensions.latent_dim}

@@ -22,7 +22,7 @@
 
 
 ## Downloads
-- All required files are provided in [this Google Drive folder](https://drive.google.com/drive/folders/102fXzrjDNjHYeNK2stfIACiOel5jh9yn?usp=sharing).
+- All required files are provided in [this folder](https://real.stanford.edu/doughnet/).
 - Download our dataset for training, testing on synthetic and real manipulation trajectories and place it in `data/dataset.h5`.
 - If you are only interested in the dataset, you can check the provided `README` for a simple data loader and a brief description of the structure.
 - Download our pretrained weights to reproduce the results in the paper and place them in `weights/{ae,dyn}.pth`.
